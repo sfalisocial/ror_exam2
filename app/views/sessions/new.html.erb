@@ -1,0 +1,19 @@
+<h1>Welcome!</h1>
+<h3>Register</h3>
+<form action="/users/create" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="text" name="user[name]" placeholder="Name">
+  <input type="text" name="user[alias]" placeholder="Alias">
+  <input type="text" name="user[email]" placeholder="Email">
+  <input type="text" name="user[password]" placeholder="Password">
+  <input type="text" name="user[password_confirmation]" placeholder="Password Confirmation">
+  <input type="submit" value="Register!">
+</form>
+
+<h3>Login</h3>
+<form action="/sessions/create" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="text" name="user[email]" placeholder="Email">
+  <input type="text" name="user[password]" placeholder="Password">
+  <input type="submit" value="Login!">
+</form>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RorBelt2</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if current_user %>
+<form action='/sessions/destroy' method='post'>
+  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+  <input type='hidden' name='_method' value='delete'>
+  <input type='submit' value='Log Out'>
+</form>
+<% end %>
+<% if flash[:msg].kind_of?(Array) %>
+  <% flash[:msg].each do |item| %>
+    <p style='color:red; font-weight:bold'><%= item %></p>
+  <% end %>
+<% else %>
+  <p style='font-weight:bold'><%= flash[:msg] %></p>
+<% end %>
+<%= yield %>
+
+</body>
+</html>

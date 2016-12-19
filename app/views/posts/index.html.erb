@@ -1,0 +1,23 @@
+<h1>Hi <%= @user.alias %>!</h1>
+<form action="/posts/create" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <textarea name="post[content]" placeholder="Post something witty here!"></textarea>
+  <input type="submit" value="Idea!">
+</form>
+
+<div class="post">
+  <% @post.each do |item| %>
+    <p><a href="/users/<%= item.user.id %>"><%= item.user.alias %></a> says:</p>
+    <p><%= item.content %></p>
+
+    <% if item.users_liked.include? @user %>
+      <p>You liked this post!</p>
+    <% else %>
+      <a href= "/likes/create/<%= item.id %>" data-method='post'>Like</a>
+    <% end %>
+      <p><a href="/bright_ideas/<%= item.id %>"><%= item.likes.count %> people</a> like this</p>
+    <% if @user.id == item.user.id %>
+      <a href= "/posts/<%= item.id %>" data-method='delete'>Delete!</a>
+    <% end %>
+  <% end %>
+</div>
